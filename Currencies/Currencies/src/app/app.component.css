@@ -1,0 +1,72 @@
+/* In your.component.css */
+
+.currency-list,
+.left-side ul,
+.right-side ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+  .currency-list li,
+  .left-side ul li,
+  .right-side ul li {
+    cursor: pointer;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 8px;
+    font-size: 14px;
+    height: 40px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+
+    .currency-list li.selected,
+    .left-side ul li.selected,
+    .right-side ul li.selected {
+      background-color: #4caf50;
+      color: #fff;
+    }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-side,
+.right-side,
+.center {
+  margin: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.left-side, .right-side {
+  flex: 1;
+}
+
+.arrow-button {
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+  .arrow-button:hover {
+    background-color: #2980b9;
+  }
+
+  .arrow-button:active {
+    background-color: #216a94;
+  }

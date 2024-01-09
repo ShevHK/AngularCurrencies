@@ -1,0 +1,31 @@
+<main class="main">
+  <div class="content">
+    <h1>Currencies</h1>
+    <div class="currency-container">
+      <div class="left-side">
+        <label for="currencies">From currency:</label>
+        <ul class="currency-list">
+          <li *ngFor="let currency of currencies" (click)="onSelectFrom(currency)"
+              [class.selected]="currency === selectedFrom">
+            {{ currency }}
+          </li>
+          <input [(ngModel)]="valueFrom" (input)="onChangeFrom(valueFrom)" type="number" />
+        </ul>
+      </div>
+      <div class="center" (click)="onArrowClick()">
+        <div class="arrow-button">&#8596;</div>
+      </div>
+      <div class="right-side">
+        <label for="currencies">To currency:</label>
+        <ul class="currency-list">
+          <li *ngFor="let currency of currencies" (click)="onSelectTo(currency)"
+              [class.selected]="currency === selectedTo">
+            {{ currency }}
+          </li>
+          <input [(ngModel)]="valueTo" (input)="onChangeTo(valueTo)" type="number" />
+        </ul>
+      </div>
+    </div>
+    <div class="divider" role="separator" aria-label="Divider"></div>
+  </div>
+</main>
