@@ -38,7 +38,7 @@ Open your browser and go to http://localhost:4200/. The app will automatically r
 
 ## Usage
 
-Open the Angular app in your browser.
-Select the "From" and "To" currencies.
-Enter the amount you want to convert.
-The converted amount will be displayed.
+- Open the Angular app in your browser.
+- Select the "From" and "To" currencies.
+- Enter the amount you want to convert.
+- The converted amount will be displayed.
