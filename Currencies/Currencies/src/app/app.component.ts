@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ExchangeRate } from './ExchangeRate ';
+import { ExchangeRate } from './components/services/ExchangeRate';
+import { CurrencyService } from './components/services/currency.service';
 
 
 @Component({
@@ -15,9 +16,10 @@ export class AppComponent {
   selectedTo: string = 'EUR';
   valueFrom: GLfloat = 0;
   valueTo: GLfloat = 0;
-  constructor() {
+  constructor(private currencyService: CurrencyService) {
     this.fetchData();
   }
+
   onSelectFrom(option: string): void {
     this.selectedFrom = option;
     this.onChangeTo(this.valueTo);
@@ -45,43 +47,22 @@ export class AppComponent {
   }
 
   CheckCurrency(symbol_1: string, symbol_2: string): GLfloat {
-    var result = this.currenciesValues[this.currencies.indexOf(symbol_2)] /
-      this.currenciesValues[this.currencies.indexOf(symbol_1)];
+    var result = this.currenciesValues[this.currencies.indexOf(symbol_1)] /
+      this.currenciesValues[this.currencies.indexOf(symbol_2)];
     return result;
   }
   async fetchData(): Promise<void> {
     try {
-      const proxyUrl = 'http://localhost:8080/';
-      const apiUrl = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5';
+      const exchangeRates = await this.currencyService.getExchangeRates().toPromise();
 
-      const response = await fetch(proxyUrl + apiUrl, {
-        method: 'GET',
-        headers: {
-          'Origin': 'http://localhost:4200',
-        },
-      });
-
-      const data = await response.json();
-
-      console.log(data);
-
-      const exchangeRates = this.parseExchangeRates(data);
-      this.currenciesValues[1] = exchangeRates[0].buy;
-      this.currenciesValues[2] = exchangeRates[1].buy;
+      if (exchangeRates && exchangeRates.length >= 2) {
+        this.currenciesValues[1] = exchangeRates[0].buy;
+        this.currenciesValues[2] = exchangeRates[1].buy;
+      } else {
+        console.error('Invalid exchange rates data:', exchangeRates);
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   }
-
-  parseExchangeRates(data: any[]): ExchangeRate[] {
-    return data.map(item => {
-      return new ExchangeRate(
-        item.ccy,
-        item.base_ccy,
-        parseFloat(item.buy),
-        parseFloat(item.sale)
-      );
-    });
-  }
-
 }

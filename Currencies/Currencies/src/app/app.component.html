@@ -9,8 +9,8 @@
               [class.selected]="currency === selectedFrom">
             {{ currency }}
           </li>
-          <input [(ngModel)]="valueFrom" (input)="onChangeFrom(valueFrom)" type="number" />
         </ul>
+        <input [(ngModel)]="valueFrom" (input)="onChangeFrom(valueFrom)" type="number" />
       </div>
       <div class="center" (click)="onArrowClick()">
         <div class="arrow-button">&#8596;</div>
@@ -22,8 +22,8 @@
               [class.selected]="currency === selectedTo">
             {{ currency }}
           </li>
-          <input [(ngModel)]="valueTo" (input)="onChangeTo(valueTo)" type="number" />
         </ul>
+        <input [(ngModel)]="valueTo" (input)="onChangeTo(valueTo)" type="number" />
       </div>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
